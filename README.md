@@ -1,7 +1,6 @@
 # Paragraph search
 
-Really simple 
-
+Really simple webscraper, which searches for sentences inside paragraph tags, based on given keywords.
 
 ## Running the code
 
