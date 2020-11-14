@@ -72,20 +72,27 @@ def insertResults(text):
     results.delete(1.0, "end")
     results.insert(tk.END, text)
     results.config(state="disabled")
+    
 
-def readFile(fullPath):
-    while not os.path.exists(fullPath):
-            time.sleep(1)
-    with open(fullPath, 'r', encoding='utf-8') as f:
-        ready()
-        insertResults(f.read())
+def updateList(results):
+    for result in results:
+        resultPages.insert("end", result.Page)
+
+def clearList():
+    resultPages.delete('0','end')
+
 
 def updateResults(url, depth, keywords):
-    filename = pc.ParagraphSearch(url, depth, keywords)
-    fullPath = os.path.join('./FoundSentences',filename)
-    readFile(fullPath)
+    updateResults.results = pc.ParagraphSearch(url, depth, keywords)
+    clearList()
+    updateList(updateResults.results)
+    insertResults("Search complete.")
+    ready()
 
-
+def showSentences(self):
+    idx = int(''.join(map(str, resultPages.curselection()))) 
+    for sentence in updateResults.results[idx].Sentences:
+        insertResults(sentence)
 
 def search():
     pUrl = url.get()
@@ -127,9 +134,15 @@ clearButton.grid(row=3, column=0, sticky="W", pady=5, padx=16)
 searchButton = tk.Button(gui, text="Search", command=search)
 searchButton.grid(row=3, column=1, sticky="E", pady=5, padx=16)
 
+#page selection
+resultPages = tk.Listbox(gui, width = 35, height= 14, selectmode="SINGLE")
+resultPages.grid(row=4, column=0, columnspan=2, sticky="W")
+resultPages.bind('<<ListboxSelect>>',showSentences)
+
 #text area
-results = tk.Text(gui, width=62, height=14, state="disabled")
-results.grid(row=4,column=0, columnspan = 2,sticky="W")
+results = tk.Text(gui, width=40, height=14, state="disabled")
+results.grid(row=4,column=1, columnspan = 2,sticky="E")
+
 
 
 

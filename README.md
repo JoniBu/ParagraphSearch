@@ -13,8 +13,9 @@ Currently this can be used on:
 
 
 ## TODO
-* fix case sensitivity
+* Filter out pages where nothing was found - probably needs sorting
+* Make search incasesensitive
 * fix stopping abort (terminating thread)
 * add scrollbar https://stackoverflow.com/questions/13832720/how-to-attach-a-scrollbar-to-a-text-widget
-* split search keywords to two columns, one for pages one for found paragraphs
 * add statistics etc.
+* Sentence formatting, remove excess spaces etc.

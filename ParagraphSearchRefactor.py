@@ -20,7 +20,8 @@ def ParagraphSearch(url, depth, words):
     foundUrls = set()
     if depth == 0:
         SearchedPages.append(SearchedPage(url, vp.findSentencesOnly(url, words)))
-        return wf.writeToFile(SearchedPages) #return filename, TODO make this more sensible
+        wf.writeToFile(SearchedPages) #return filename, TODO make this more sensible
+        return(SearchedPages)
     currDepth = 0
     while depth > currDepth:
         currDepth += 1
@@ -41,4 +42,5 @@ def ParagraphSearch(url, depth, words):
             foundUrls.update(newUrls) #replace with only new urls
         else:
             break
-    return wf.writeToFile(SearchedPages) #return filename, TODO make this more sensible
+    wf.writeToFile(SearchedPages) #return filename, TODO make this more sensible
+    return (SearchedPages)
