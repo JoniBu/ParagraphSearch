@@ -4,22 +4,22 @@ from datetime import datetime
 
 
 
-def writeToFile(sentences):
+def writeToFile(SearchedPages):
     filename = 'searchedWords'+datetime.now().strftime("%Y%m%d-%H%M%S")+'.txt'
     fullPath = os.path.join('./FoundSentences',filename)
     File = open(fullPath, "w", encoding='utf-8')
     File.write('Found words: ')
-    NoSentences = []
-    for i in range(len(sentences)):
-        if not sentences[i][1]: #TODO, as none found, add "header" and save all links where no founds
-            #File.write('\nNo words found from this link.\n')
-            NoSentences.append(sentences[i][0])
+    NoWords = []
+    for i in range(len(SearchedPages)):
+        if SearchedPages[i].Sentences != []:
+            File.write('\n' + SearchedPages[i].Page)
+            for j in range(len(SearchedPages[i].Sentences)):
+                File.write('\n' + SearchedPages[i].Sentences[j])
         else:
-            File.write('\n' + sentences[i][0])
-            for sentence in sentences[i][1]:
-                File.write('\n' + sentence + '\n')
-    File.write('\nNo words found from following pages:\n')
-    for page in NoSentences:
-        File.write(page + '\n')
+            NoWords.append(SearchedPages[i].Page)
+    if NoWords != []:
+        File.write('\n No words found from following pages: ')
+        for i in range(len(NoWords)):
+            File.write('\n' + SearchedPages[i].Page)
     File.close()
     return filename

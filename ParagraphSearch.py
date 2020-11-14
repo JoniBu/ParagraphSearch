@@ -1,3 +1,5 @@
+#OLD PARAGRAPH SEARCH
+
 import sys
 import os
 from main import visitPage as vp
@@ -22,8 +24,8 @@ def ParagraphSearch(url, depth, words):
             print('Found following sentences ', words, ' in ', url) #move to method
             for sentence in sentences:
                 print(sentence)
-            #print loop sentences = visit[1] - create method
-            return url, sentences
+                #print loop sentences = visit[1] - create method
+                return url, sentences
     else:
         foundSentences.insert(0,[url,sentences]) #add sentences, with first element as url of page
         currDepth = 0
@@ -44,6 +46,4 @@ def ParagraphSearch(url, depth, words):
                 foundUrls.update(newUrls) #replace with only new urls
             else:
                 break
-
         return wf.writeToFile(foundSentences) #return filename, TODO make this more sensible
-

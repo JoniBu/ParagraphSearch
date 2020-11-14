@@ -1,7 +1,7 @@
 import tkinter as tk
 import re
 from tkinter import messagebox
-import ParagraphSearch as pc
+import ParagraphSearchRefactor as pc
 import os
 import time
 import threading
@@ -19,7 +19,6 @@ gui.title("Paragraph searcher")
 gui.geometry("500x345")
 gui.resizable(width=False, height=False)
 fontsize = "none 11"
-
 
 #parameters
 url = tk.StringVar(gui)
@@ -40,7 +39,7 @@ urlValidityRegex = re.compile(
 
 class Thread:
     def __init__(self):
-        self.t = threading.Thread(target=updateResults, args=(url.get(), depth.get(), [words for segments in keywords.get() for words in segments.split()]))
+        self.t = threading.Thread(target=updateResults, args=(url.get(), depth.get(), re.sub("[^\w]", " ",  keywords.get()).split()))
     
     def start(self):
         plsWait(self)
@@ -52,6 +51,7 @@ class Thread:
         self.t._stop() # not actually stopped..
         insertResults("Search stopped.")
         ready()
+        print(keywords)
         del(self)
 
 

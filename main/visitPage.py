@@ -19,3 +19,13 @@ def visitPage(currentUrl, words):
     else:
         return foundUrls, crawl.findSentences(lxml, words)
 
+def findSentencesOnly(url, words):
+    try:
+        res = requests.get(url, headers=headers)
+        if res.raise_for_status():
+            return None, None
+    except:
+        return None, None
+    lxml = bs4.BeautifulSoup(res.text, 'lxml')
+    return crawl.findSentences(lxml, words)
+

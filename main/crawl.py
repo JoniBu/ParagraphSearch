@@ -7,7 +7,6 @@ def findSentences(lxml, words):
         for tag in lxml.descendants:
             if tag.name == 'p' and tag.string and word in tag.string:
                 sentences.append(tag.string)
-
     return sentences
 
     
