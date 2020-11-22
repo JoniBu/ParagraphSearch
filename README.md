@@ -10,13 +10,10 @@ Currently this can be used on:
 * and from simple GUI, `gui.pyw`. Currently supports multiple words.
 ![alt text](sample.png "Gui")
 
-Results are saved to FoundSentences (as text files, xlsx would probably be better format), and displayed in GUI if used.
-
+Results are saved to FoundSentences as text files, and displayed in GUI if used.
 
 
 ## TODO
-* Make search incasesensitive
-* fix stopping abort (terminating thread)
-* add scrollbar https://stackoverflow.com/questions/13832720/how-to-attach-a-scrollbar-to-a-text-widget
-* add statistics etc.
-* Sentence formatting, remove excess spaces etc.
+* Add scrollbar for page/result fields.
+* Add statistics etc.
+* Sentence saving format change?
