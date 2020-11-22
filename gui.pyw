@@ -16,7 +16,7 @@ import threading
 
 gui = tk.Tk()
 gui.title("Paragraph searcher")
-gui.geometry("500x345")
+gui.geometry("475x350")
 gui.resizable(width=False, height=False)
 fontsize = "none 11"
 
@@ -47,20 +47,21 @@ class Thread:
         del(self.t)
 
 
-    def abort(self):
-        self.t._stop() # not actually stopped..
-        insertResults("Search stopped.")
-        ready()
-        print(keywords)
-        del(self)
+    # def abort(self):
+    #     self.t._stop()
+    #     insertResults("Search stopped.")
+    #     ready()
+    #     print(keywords)
+    #     del(self)
 
 
 
 def plsWait(thread):
     results.config(foreground="red")
     insertResults("Searching, please wait...")
-    clearButton.config(text="Abort \n(unadvisable)", command=lambda :Thread.abort(thread), height=2, background="light coral")
+    #clearButton.config(text="Abort \n(unadvisable)", command=lambda :Thread.abort(thread), height=2, background="light coral")
     searchButton.config(state="disabled")
+    clearButton.config(state='disabled')
 
 def ready():
     results.config(foreground="black")
@@ -83,7 +84,7 @@ def clearList():
 
 
 def updateResults(url, depth, keywords):
-    updateResults.results = pc.ParagraphSearch(url, depth, keywords)
+    updateResults.results = pc.ParagraphSearch(url, depth, keywords, True)
     clearList()
     updateList(updateResults.results)
     insertResults("Search complete.")
@@ -135,14 +136,13 @@ searchButton = tk.Button(gui, text="Search", command=search)
 searchButton.grid(row=3, column=1, sticky="E", pady=5, padx=16)
 
 #page selection
-resultPages = tk.Listbox(gui, width = 35, height= 14, selectmode="SINGLE")
+resultPages = tk.Listbox(gui, width = 28, height= 14, selectmode="SINGLE")
 resultPages.grid(row=4, column=0, columnspan=2, sticky="W")
 resultPages.bind('<<ListboxSelect>>',showSentences)
 
 #text area
-results = tk.Text(gui, width=40, height=14, state="disabled")
+results = tk.Text(gui, width=35, height=14, state="disabled")
 results.grid(row=4,column=1, columnspan = 2,sticky="E")
-
 
 
 

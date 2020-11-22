@@ -11,8 +11,15 @@ class SearchedPage:
         self.Page = Page
         self.Sentences = Sentences
 
+def onlyFoundSentences(SearchedPages):
+    foundSentences = []
+    for page in SearchedPages:
+        if page.Sentences != []:
+            foundSentences.append(SearchedPage(page.Page, page.Sentences))
+    return foundSentences
 
-def ParagraphSearch(url, depth, words):
+
+def ParagraphSearch(url, depth, words, onlyFindings=False):
     if isinstance(words, str) == True: #convert to list if only one search word
         words = [words]
     usedUrls = {url} #add starting point
@@ -21,7 +28,10 @@ def ParagraphSearch(url, depth, words):
     if depth == 0:
         SearchedPages.append(SearchedPage(url, vp.findSentencesOnly(url, words)))
         wf.writeToFile(SearchedPages) #return filename, TODO make this more sensible
-        return(SearchedPages)
+        if onlyFindings==False:
+            return(SearchedPages)
+        else:
+            return onlyFoundSentences(SearchedPages)
     currDepth = 0
     while depth > currDepth:
         currDepth += 1
@@ -42,5 +52,8 @@ def ParagraphSearch(url, depth, words):
             foundUrls.update(newUrls) #replace with only new urls
         else:
             break
-    wf.writeToFile(SearchedPages) #return filename, TODO make this more sensible
-    return (SearchedPages)
+    wf.writeToFile(SearchedPages)
+    if onlyFindings==False:
+        return(SearchedPages)
+    else:
+        return onlyFoundSentences(SearchedPages)

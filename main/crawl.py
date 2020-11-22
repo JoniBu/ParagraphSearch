@@ -3,9 +3,10 @@ from urllib.parse import urlparse
 
 def findSentences(lxml, words):
     sentences = []
-    for word in words:
+    wordsLower = [w.lower() for w in words]
+    for word in wordsLower:
         for tag in lxml.descendants:
-            if tag.name == 'p' and tag.string and word in tag.string:
+            if tag.name == 'p' and tag.string and word in tag.string.lower():
                 sentences.append(tag.string)
     return sentences
 
