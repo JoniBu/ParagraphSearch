@@ -1,7 +1,7 @@
 import tkinter as tk
 import re
 from tkinter import messagebox
-from main import ParagraphSearchRefactor as pc
+from main import ParagraphSearch pc
 import os
 import time
 import threading
