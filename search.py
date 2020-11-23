@@ -1,6 +1,6 @@
 import sys
 import os
-import ParagraphSearchRefactor as pc
+from main import ParagraphSearchRefactor as pc
 
 
 

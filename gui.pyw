@@ -1,17 +1,10 @@
 import tkinter as tk
 import re
 from tkinter import messagebox
-import ParagraphSearchRefactor as pc
+from main import ParagraphSearchRefactor as pc
 import os
 import time
 import threading
-
-
-
-#TODO fix stopping abort/thread stop
-#TODO add scrollbar https://stackoverflow.com/questions/13832720/how-to-attach-a-scrollbar-to-a-text-widget
-#TODO fix multiple keywords
-#TODO split search keywords to two columns, one for pages one for found paragraphs
 
 
 gui = tk.Tk()
